@@ -14,7 +14,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         Nodo der;
         Nodo padre;
         
-        Nodo(T v) {this.valor = v; }
+        Nodo(T v) {this.valor = v;}
     }
 
     public ABB() {
@@ -46,13 +46,15 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             if (actual.der == null){
                 return actual;
             }else{
-                return buscarPadre(actual.der, e);
+                actual = actual.der;
+                return buscarPadre(actual, e);
             }
         }else if(e.compareTo(actual.valor) < 0){
             if (actual.izq == null){
                 return actual;
             }else{
-                return buscarPadre(actual.izq, e);
+                actual = actual.izq;
+                return buscarPadre(actual, e);
             }
         }else{
             return actual;
@@ -72,14 +74,18 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         }
     }
 
+    private boolean perteneceAux(Nodo n, T e){
+        Nodo actual = n;
+        
 
     public boolean pertenece(T elem){
-        Nodo actual = raiz;
-        if (actual.valor == null){
+        if (raiz.valor == null){
             return false;
         }
-        else if (actual.valor == elem){
+        else if (raiz.valor == elem){
             return true;
+        }else{
+            return perteneceAux( elem);
         }
     }
 
